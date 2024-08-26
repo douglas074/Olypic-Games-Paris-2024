@@ -1,0 +1,52 @@
+relationship 89479700-17de-4df3-99d7-f179200f2931
+	joinOnDateBehavior: datePartOnly
+	fromColumn: athletes.birth_date
+	toColumn: LocalDateTable_9c8f0000-f52a-4c47-8d04-1ce697068a61.Date
+
+relationship f20d993a-d20f-4158-9a4f-3ce37e2ec0e9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: medals.medal_date
+	toColumn: LocalDateTable_eebf603e-d3fc-4ff8-ad59-11220f02442b.Date
+
+relationship 77d8ae0d-8053-407e-b301-d5d2c98c0723
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Sports General'.date
+	toColumn: LocalDateTable_8dafd278-a822-4367-854c-aaaaa1017f77.Date
+
+relationship AutoDetected_825b59bb-07e5-4a68-ba25-b9491009f1f1
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Ranking.'Country Code'
+	toColumn: Flags.'Country Code'
+
+relationship c97fe777-8b6c-89ce-a13b-82024383deab
+	fromColumn: medallists.country_code
+	toColumn: Flags.'Country Code'
+
+relationship c701eb2f-f6af-6156-f184-390e403c49b8
+	fromColumn: 'Sports General'.participant_country_code
+	toColumn: Ranking.'Country Code'
+
+relationship e2f401dd-0c0a-bd3a-8ef2-db496b57ba07
+	isActive: false
+	fromColumn: medallists.country_code
+	toColumn: Ranking.'Country Code'
+
+relationship df52fa99-cf00-240c-f4d7-3f4e14f4b45f
+	isActive: false
+	fromColumn: 'Sports General'.participant_country
+	toColumn: Ranking.Country
+
+relationship b3cce9a4-25e5-f275-b332-04e0bd57c661
+	fromColumn: medallists.athlete_code
+	toColumn: athletes.code
+
+relationship a2bf0078-5a4f-3733-1ff2-47609aa52ea6
+	isActive: false
+	fromColumn: medals.code
+	toColumn: athletes.code
+
+relationship 35bc9119-318a-3ee0-591f-f651bb971003
+	fromColumn: 'Sports General'.participant_code
+	toColumn: athletes.code
+

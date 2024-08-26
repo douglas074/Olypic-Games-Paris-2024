@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 15040.546160270835
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 515.99905544024807,
+            "y": 16384.441509351032
+          },
+          "nodeIndex": "athletes",
+          "nodeLineageTag": "efb0211a-606f-4ed3-8d91-547e47ed901c",
+          "size": {
+            "height": 658,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 371.4089172778215,
+            "y": 15701.508816226966
+          },
+          "nodeIndex": "medallists",
+          "nodeLineageTag": "b4a26ba4-7d2d-4415-9f74-eec991212bd4",
+          "size": {
+            "height": 504.05282427358969,
+            "width": 180.18387052125115
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 16459.60029466209
+          },
+          "nodeIndex": "medals",
+          "nodeLineageTag": "3d686db1-37d8-4f0f-9907-4d47af9429b7",
+          "size": {
+            "height": 367.27016184843615,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1354.2679081803369,
+            "y": 16508.598282366329
+          },
+          "nodeIndex": "Sports General",
+          "nodeLineageTag": "c715db40-3fec-48ee-8ae2-460451fb19a4",
+          "size": {
+            "height": 623.170863668128,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 705.4311777587011,
+            "y": 15334.631200115231
+          },
+          "nodeIndex": "Flags",
+          "nodeLineageTag": "b562c399-4cb6-4fbd-9551-77f97bf03bfc",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1222.1242533352404,
+            "y": 16095.0250474511
+          },
+          "nodeIndex": "Ranking",
+          "nodeLineageTag": "9f3413da-590c-4889-ab2e-2091687a6a42",
+          "size": {
+            "height": 279.652072163949,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 39.450695702325504,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

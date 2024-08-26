@@ -1,0 +1,44 @@
+table Flags
+	lineageTag: b562c399-4cb6-4fbd-9551-77f97bf03bfc
+
+	column URL
+		dataType: string
+		lineageTag: 9b8c2732-056a-4c15-8f68-ca7bc1bc3e46
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country Code'
+		dataType: string
+		lineageTag: 7d24a20a-c4af-4af6-b65a-e62b0956c69d
+		summarizeBy: none
+		sourceColumn: Country Code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Flags = m
+		mode: import
+		source = ```
+				let
+				    Fonte = let
+				    // Substitua "SuaTabela" pelo nome da tabela que contém as abreviações dos países
+				    Source = Ranking,
+				    
+				    // Crie uma nova coluna "URL" concatenando a URL base com a abreviação do país
+				    AddCustomColumn = Table.AddColumn(Source, "URL", each "https://gstatic.olympics.com/s1/t_original/static/noc/oly/3x2/180x120/" & [Country Code] & ".png"),
+				    
+				    // Selecione as colunas que você deseja manter na tabela final
+				    SelectColumns = Table.SelectColumns(AddCustomColumn, {"Country Code", "URL"})
+				    
+				in
+				    SelectColumns
+				in
+				    Fonte
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.1.0/schema.json",
+  "name": "396885f3b79c70a24bfb",
+  "displayName": "Home",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Frame 1.svg'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "Frame_149559481901211666.svg"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "e4f192bd5783bda9e9fa",
+      "target": "cad46cf07d7a67736419",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "0394b7614e74d6e962da",
+      "target": "cad46cf07d7a67736419",
+      "type": "DataFilter"
+    },
+    {
+      "source": "68eaa2c9bf6bab766541",
+      "target": "cad46cf07d7a67736419",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "cb49ddd6346ee1b6a9ec",
+      "target": "cad46cf07d7a67736419",
+      "type": "DataFilter"
+    }
+  ]
+}

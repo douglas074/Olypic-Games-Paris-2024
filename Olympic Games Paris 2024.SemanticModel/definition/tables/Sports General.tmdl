@@ -1,0 +1,194 @@
+table 'Sports General'
+	lineageTag: c715db40-3fec-48ee-8ae2-460451fb19a4
+
+	column gender
+		dataType: string
+		lineageTag: baefeaca-3a9c-4cf9-90e3-a65761e07bfd
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f7a06f4c-64c5-4f70-9ac7-548bc31304b3
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 77d8ae0d-8053-407e-b301-d5d2c98c0723
+			defaultHierarchy: LocalDateTable_8dafd278-a822-4367-854c-aaaaa1017f77.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage_code
+		dataType: string
+		lineageTag: d46069e0-24f8-4493-9253-58552c58434c
+		summarizeBy: none
+		sourceColumn: stage_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_code
+		dataType: string
+		lineageTag: 65b33495-063e-47dd-88b4-2de440a813e4
+		summarizeBy: none
+		sourceColumn: event_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_name
+		dataType: string
+		lineageTag: 70dfc7b0-b7dd-47bb-88e0-b65fe82bc843
+		summarizeBy: none
+		sourceColumn: event_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_stage
+		dataType: string
+		lineageTag: 2a692b63-3342-4cd2-8560-712ebd93a61d
+		summarizeBy: none
+		sourceColumn: event_stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage
+		dataType: string
+		lineageTag: e4283ee3-59d8-463a-b5a0-f4bd61fae043
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage_status
+		dataType: string
+		lineageTag: f302a2b0-390c-4a4d-b3dd-98f33447c9ca
+		summarizeBy: none
+		sourceColumn: stage_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column discipline_name
+		dataType: string
+		lineageTag: 4a87e6f7-cc9a-4ad1-b1c0-47fc3fbf1380
+		summarizeBy: none
+		sourceColumn: discipline_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column discipline_code
+		dataType: string
+		lineageTag: e4581680-b395-419d-b8cb-f4783de3ced5
+		summarizeBy: none
+		sourceColumn: discipline_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column venue
+		dataType: string
+		lineageTag: 4f447b40-f925-4740-9a2b-8eedb40f33d8
+		summarizeBy: none
+		sourceColumn: venue
+
+		annotation SummarizationSetBy = Automatic
+
+	column participant_code
+		dataType: string
+		lineageTag: c1965f5b-8a90-465a-88df-b56d8d20318f
+		summarizeBy: none
+		sourceColumn: participant_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column participant_name
+		dataType: string
+		lineageTag: adf20eb3-bff0-418c-9284-4fd2068bea2f
+		summarizeBy: none
+		sourceColumn: participant_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column participant_type
+		dataType: string
+		lineageTag: 0cd2fbd9-0158-4daf-b433-1feeead6c86b
+		summarizeBy: none
+		sourceColumn: participant_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column participant_country_code
+		dataType: string
+		lineageTag: 0e46e16b-a777-49ed-b2a3-fa64d34a9bd8
+		summarizeBy: none
+		sourceColumn: participant_country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column participant_country
+		dataType: string
+		lineageTag: 41427d13-a98c-4f23-b007-5b531a0c3fc5
+		summarizeBy: none
+		sourceColumn: participant_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column result
+		dataType: int64
+		formatString: 0
+		lineageTag: ead92a91-f691-4a7a-8595-3d01847e9892
+		summarizeBy: sum
+		sourceColumn: result
+
+		annotation SummarizationSetBy = Automatic
+
+	column result_type
+		dataType: string
+		lineageTag: 37d34878-3005-40c0-bd90-6b2f5f496905
+		summarizeBy: none
+		sourceColumn: result_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column result_WLT
+		dataType: string
+		lineageTag: fbdeda5c-6861-4151-9283-c02dca9867ad
+		summarizeBy: none
+		sourceColumn: result_WLT
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_order
+		dataType: int64
+		formatString: 0
+		lineageTag: bfe31b45-e3cf-4b02-a87e-8762c4dbd45f
+		summarizeBy: sum
+		sourceColumn: start_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sports General' = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\results"),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(Fonte,{"Content"}),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(#"Outras Colunas Removidas", each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo (2)", each #"Transformar Arquivo (2)"([Content])),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Invocar Função Personalizada1", {"Transformar Arquivo (2)"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo (2)", Table.ColumnNames(#"Transformar Arquivo (2)"(#"Arquivo de Amostra (2)"))),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Coluna de Tabela Expandida1",{{"date", type datetimezone}, {"stage_code", type text}, {"event_code", type text}, {"event_name", type text}, {"event_stage", type text}, {"stage", type text}, {"stage_status", type text}, {"gender", type text}, {"discipline_name", type text}, {"discipline_code", type text}, {"venue", type text}, {"participant_code", type text}, {"participant_name", type text}, {"participant_type", type text}, {"participant_country_code", type text}, {"participant_country", type text}, {"result", Int64.Type}, {"result_type", type text}, {"result_WLT", type text}, {"start_order", Int64.Type}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each true),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Linhas Filtradas", {"result"}),
+				    #"Dividir Coluna por Delimitador" = Table.ExpandListColumn(Table.TransformColumns(#"Erros Removidos", {{"participant_name", Splitter.SplitTextByDelimiter("/", QuoteStyle.Csv), let itemType = (type nullable text) meta [Serialized.Text = true] in type {itemType}}}), "participant_name"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"participant_name", type text}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado1", {"participant_code", "participant_name", "event_code"})
+				in
+				    #"Duplicatas Removidas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

@@ -1,0 +1,187 @@
+table medallists
+	lineageTag: b4a26ba4-7d2d-4415-9f74-eec991212bd4
+
+	column name
+		dataType: string
+		lineageTag: c6da4bb3-e15e-48bb-8dbe-98743da8566b
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: ceaccf84-059d-4c8b-8da9-917499c88977
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		lineageTag: e3dca4ca-1630-4125-9093-6ba8732d13a0
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gold
+		dataType: int64
+		lineageTag: 45572a9c-d21d-45d9-9af4-c55ee8d3bb92
+		summarizeBy: sum
+		sourceColumn: Gold
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Prata
+		dataType: int64
+		lineageTag: 1e0bee41-b5b5-4fd5-9e11-347f90b2e9fd
+		summarizeBy: sum
+		sourceColumn: Prata
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Bronze
+		dataType: int64
+		lineageTag: bab5314e-ec3f-4886-88f9-54fef9922aa7
+		summarizeBy: sum
+		sourceColumn: Bronze
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Ranking
+		dataType: int64
+		formatString: 0
+		lineageTag: 43fdfbed-e1ed-4e41-b68a-003c14958830
+		summarizeBy: sum
+		sourceColumn: Ranking
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: string
+		lineageTag: bda425ba-cef0-4183-84d7-8fac4072a2f3
+		summarizeBy: none
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: af1cf2e2-40e5-41d3-9ad2-68a6325e82e1
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column athlete_code
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b449d9b-346e-4ad6-be8a-fd3c439a230a
+		summarizeBy: none
+		sourceColumn: athlete_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition medallists = m
+		mode: import
+		source = ```
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\geral\medallists.csv"),[Delimiter=",", Columns=16, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"medal_date", type date}, {"medal_type", type text}, {"medal_code", Int64.Type}, {"name", type text}, {"gender", type text}, {"country", type text}, {"country_code", type text}, {"nationality", type text}, {"team", type text}, {"team_gender", type text}, {"discipline", type text}, {"event", type text}, {"event_type", type text}, {"url_event", type text}, {"birth_date", type date}, {"code", Int64.Type}}),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Tipo Alterado", {"code"}),
+				    #"Linhas Agrupadas" = let
+				    Fonte = #"Erros Removidos",
+				    TabelaAgrupada = Table.Group(
+				        Fonte, 
+				        {"name", "country", "country_code"}, 
+				        {
+				            {"Gold", each List.Sum(List.Transform([medal_code], each if _ = 1 then 1 else 0)), type nullable number},
+				            {"Prata", each List.Sum(List.Transform([medal_code], each if _ = 2 then 1 else 0)), type nullable number},
+				            {"Bronze", each List.Sum(List.Transform([medal_code], each if _ = 3 then 1 else 0)), type nullable number}
+				        }
+				    )
+				in
+				    TabelaAgrupada,
+				    Ordenação = let
+				    Fonte = #"Linhas Agrupadas",
+				    Ordenada = Table.Sort(Fonte, {{"Gold", Order.Descending}, {"Prata", Order.Descending}, {"Bronze", Order.Descending}})
+				in
+				    Ordenada,
+				    Ranqueamento = let
+				    Fonte = #"Ordenação",
+				    AdicionaRanking = Table.AddIndexColumn(Fonte, "Ranking", 1, 1, Int64.Type)
+				in
+				    AdicionaRanking,
+				    Total = Table.AddColumn(Ranqueamento, "Total", each [Gold] + [Prata] + [Bronze]),
+				    Personalizar1 = let
+				    // Etapas anteriores do fluxo da tabela medallists
+				    Source = Total, // Sua fonte de dados original para medallists
+				    // Outras transformações anteriores...
+				
+				    // Passo: Mesclar a tabela medallists com a tabela athletes pela coluna name
+				    MergedTables = Table.NestedJoin(
+				        Total, // Substitua por sua etapa anterior na consulta medallists
+				        {"name"}, 
+				        athletes, 
+				        {"name"}, 
+				        "athletes_data", 
+				        JoinKind.LeftOuter
+				    ),
+				
+				    // Passo: Expandir a coluna "athletes_data" para adicionar a coluna "gender"
+				    ExpandedTable = Table.ExpandTableColumn(
+				        MergedTables, 
+				        "athletes_data", 
+				        {"gender"}, 
+				        {"gender"}
+				    )
+				in
+				    ExpandedTable,
+				    #"Linhas Filtradas1" = Table.SelectRows(Personalizar1, each [name] <> null and [name] <> ""),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Linhas Filtradas1", each ([name] <> "671")),
+				    Personalizar2 = let
+				    // Etapas anteriores do fluxo da tabela medallists
+				    Source = #"Linhas Filtradas", // Substitua pelo nome da sua fonte de dados original para medallists
+				
+				    // Passo: Mesclar a tabela medallists com a tabela athletes pelas colunas name e country
+				    MergedTables = Table.NestedJoin(
+				        Source, 
+				        {"name", "country"}, 
+				        athletes, 
+				        {"name", "country"}, 
+				        "athletes_data", 
+				        JoinKind.LeftOuter
+				    ),
+				
+				    // Passo: Expandir a coluna "athletes_data" para adicionar a coluna "code"
+				    ExpandedTable = Table.ExpandTableColumn(
+				        MergedTables, 
+				        "athletes_data", 
+				        {"code"}, 
+				        {"athlete_code"}
+				    )
+				in
+				    ExpandedTable,
+				    #"Duplicatas Removidas" = Table.Distinct(Personalizar2, {"athlete_code"})
+				in
+				    #"Duplicatas Removidas"
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

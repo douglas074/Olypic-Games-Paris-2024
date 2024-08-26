@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Olympic Games Paris 2024"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5123b7da-d456-4b9d-b149-197566d2e305"
+  }
+}

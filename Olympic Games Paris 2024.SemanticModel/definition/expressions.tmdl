@@ -1,0 +1,101 @@
+expression 'Arquivo de Amostra' =
+		let
+		    Fonte = Folder.Files("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\geral"),
+		    #"Outras Colunas Removidas" = Table.SelectColumns(Fonte,{"Content"}),
+		    Navegação1 = #"Outras Colunas Removidas"{0}[Content]
+		in
+		    Navegação1
+	lineageTag: b5a78390-ff04-4d78-9829-2670dc33742a
+	queryGroup: 'Transformar Arquivo de geral\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression Parâmetro1 = #"Arquivo de Amostra" meta [IsParameterQuery=true, BinaryIdentifier=#"Arquivo de Amostra", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: bdca3ed2-e6ad-4ee9-9531-d7a511c11667
+	queryGroup: 'Transformar Arquivo de geral\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar o Arquivo de Exemplo' =
+		let
+		    Fonte = Csv.Document(Parâmetro1,[Delimiter=",", Columns=35, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: 8a8295f3-4e1b-49c1-ba8e-2f3b8efb5e1b
+	queryGroup: 'Transformar Arquivo de geral'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transformar Arquivo' =
+		let
+		    Fonte = (Parâmetro1 as binary) => let
+		    Fonte = Csv.Document(Parâmetro1,[Delimiter=",", Columns=35, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+		in
+		    Fonte
+	lineageTag: 87448746-e9c5-4367-a9e0-486003015af2
+	queryGroup: 'Transformar Arquivo de geral\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Function
+
+expression 'Arquivo de Amostra (2)' =
+		let
+		    Fonte = Folder.Files("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\results"),
+		    #"Outras Colunas Removidas" = Table.SelectColumns(Fonte,{"Content"}),
+		    Navegação1 = #"Outras Colunas Removidas"{0}[Content]
+		in
+		    Navegação1
+	lineageTag: 8c13b62a-67ac-4431-b6ab-9d66b7fe1f23
+	queryGroup: 'Transformar Arquivo de Sports General\Consultas Auxiliares (2)'
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Binary
+
+expression Parâmetro2 = #"Arquivo de Amostra (2)" meta [IsParameterQuery=true, BinaryIdentifier=#"Arquivo de Amostra (2)", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 8600cde7-1e1f-48aa-86af-009c02a9304c
+	queryGroup: 'Transformar Arquivo de Sports General\Consultas Auxiliares (2)'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar o Arquivo de Exemplo (2)' =
+		let
+		    Fonte = Csv.Document(Parâmetro2,[Delimiter=",", Columns=20, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: 46ecf1fa-2119-40e0-89f6-4f27e188565e
+	queryGroup: 'Transformar Arquivo de Sports General'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transformar Arquivo (2)' =
+		let
+		    Fonte = (Parâmetro2 as binary) => let
+		    Fonte = Csv.Document(Parâmetro2,[Delimiter=",", Columns=20, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+		in
+		    Fonte
+	lineageTag: e959ea10-f92b-4aba-8234-14a750cb6b02
+	queryGroup: 'Transformar Arquivo de Sports General\Consultas Auxiliares (2)'
+
+	annotation PBI_ResultType = Function
+
+expression medals_total =
+		let
+		    Fonte = Csv.Document(File.Contents("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\geral\medals_total.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+		    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"country_code", type text}, {"Gold Medal", Int64.Type}, {"Silver Medal", Int64.Type}, {"Bronze Medal", Int64.Type}, {"Total", Int64.Type}})
+		in
+		    #"Tipo Alterado"
+	lineageTag: db74881f-eb1b-4ef9-b4f5-2fe871edde7a
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

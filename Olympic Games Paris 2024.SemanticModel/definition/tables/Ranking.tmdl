@@ -1,0 +1,95 @@
+table Ranking
+	lineageTag: 9f3413da-590c-4889-ab2e-2091687a6a42
+
+	column Rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 923c18cb-e0df-4f97-94f8-a926b91c7ceb
+		summarizeBy: none
+		sourceColumn: Rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: b6aa0b21-a9fa-4b34-827a-1a9318a2d724
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country Code'
+		dataType: string
+		lineageTag: 91c862e1-d8a8-47c4-96cc-679533398efd
+		summarizeBy: none
+		sourceColumn: Country Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gold
+		dataType: int64
+		formatString: 0
+		lineageTag: 159b5baf-2eeb-435a-b283-97d42580e58a
+		summarizeBy: none
+		sourceColumn: Gold
+
+		annotation SummarizationSetBy = Automatic
+
+	column Silver
+		dataType: int64
+		formatString: 0
+		lineageTag: b1ebe614-e7ce-47b6-9289-cc40fa03e99c
+		summarizeBy: none
+		sourceColumn: Silver
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bronze
+		dataType: int64
+		formatString: 0
+		lineageTag: 167f27e3-116f-4098-bb67-4c5409140bfd
+		summarizeBy: none
+		sourceColumn: Bronze
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: int64
+		formatString: 0
+		lineageTag: a48faab9-fc7a-484e-8a85-61ee9107e207
+		summarizeBy: none
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ranking = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\olympics2024.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Rank", Int64.Type}, {"Country", type text}, {"Country Code", type text}, {"Gold", Int64.Type}, {"Silver", Int64.Type}, {"Bronze", Int64.Type}, {"Total", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","US","USA",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","GBG","GBR",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","NZ","NZL",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","SPA","ESP",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3","IRE","IRL",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído5" = Table.ReplaceValue(#"Valor Substituído4","BRZ","BRA",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído6" = Table.ReplaceValue(#"Valor Substituído5","IRN","IRI",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído7" = Table.ReplaceValue(#"Valor Substituído6","ROM","ROU",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído8" = Table.ReplaceValue(#"Valor Substituído7","SER","SRB",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído9" = Table.ReplaceValue(#"Valor Substituído8","BHR","BRN",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído10" = Table.ReplaceValue(#"Valor Substituído9","HK","HKG",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído11" = Table.ReplaceValue(#"Valor Substituído10","IDN","INA",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído12" = Table.ReplaceValue(#"Valor Substituído11","SA","RSA",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído13" = Table.ReplaceValue(#"Valor Substituído12","SWI","SUI",Replacer.ReplaceValue,{"Country Code"}),
+				    #"Valor Substituído14" = Table.ReplaceValue(#"Valor Substituído13","MOR","MAR",Replacer.ReplaceText,{"Country Code"}),
+				    #"Valor Substituído15" = Table.ReplaceValue(#"Valor Substituído14","PKN","PAK",Replacer.ReplaceText,{"Country Code"}),
+				    #"Valor Substituído16" = Table.ReplaceValue(#"Valor Substituído15","SIN","SGP",Replacer.ReplaceText,{"Country Code"})
+				in
+				    #"Valor Substituído16"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

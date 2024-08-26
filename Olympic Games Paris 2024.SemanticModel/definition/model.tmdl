@@ -1,0 +1,50 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'Transformar Arquivo de geral'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transformar Arquivo de geral\Consultas Auxiliares'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transformar Arquivo de Sports General'
+
+	annotation PBI_QueryGroupOrder = 1
+
+/// Erros nas consultas que foram carregadas em 20/08/2024 15:26:02.
+queryGroup 'Erros na Consulta - 20/08/2024 15:26:02'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Transformar Arquivo de Sports General\Consultas Auxiliares (2)'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["athletes","medallists","medals","Sports General","Arquivo de Amostra","Parâmetro1","Transformar o Arquivo de Exemplo","Transformar Arquivo","Arquivo de Amostra (2)","Parâmetro2","Transformar o Arquivo de Exemplo (2)","Transformar Arquivo (2)","medals_total","Flags","Ranking"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.132.1053.0 (24.08)
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_5b3b767c-f255-4b11-8fdd-1829487d06e3
+ref table athletes
+ref table LocalDateTable_9c8f0000-f52a-4c47-8d04-1ce697068a61
+ref table medallists
+ref table medals
+ref table LocalDateTable_eebf603e-d3fc-4ff8-ad59-11220f02442b
+ref table 'Sports General'
+ref table LocalDateTable_8dafd278-a822-4367-854c-aaaaa1017f77
+ref table Flags
+ref table Ranking
+
+ref cultureInfo pt-BR
+

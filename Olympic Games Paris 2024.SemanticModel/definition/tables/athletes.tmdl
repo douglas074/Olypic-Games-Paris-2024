@@ -1,0 +1,308 @@
+table athletes
+	lineageTag: efb0211a-606f-4ed3-8d91-547e47ed901c
+
+	column code
+		dataType: int64
+		formatString: 0
+		lineageTag: ace7981d-5dee-4448-b6df-2fccc299a5ad
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: a41e7b5b-f6fb-47a2-9ebc-0c6efa2b1038
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column name_short
+		dataType: string
+		lineageTag: f1cc342e-814a-42ff-b915-9f3420a087cf
+		summarizeBy: none
+		sourceColumn: name_short
+
+		annotation SummarizationSetBy = Automatic
+
+	column name_tv
+		dataType: string
+		lineageTag: 7a5b0432-c706-48f8-a561-bd57225ff97c
+		summarizeBy: none
+		sourceColumn: name_tv
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: b67ffb07-f2a3-4418-84cc-064d3e4ad209
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column function
+		dataType: string
+		lineageTag: 5d295791-3f3b-4219-bddb-ba8b24d272b7
+		summarizeBy: none
+		sourceColumn: function
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		lineageTag: 4b6ae18d-ec66-4dbf-bc2c-9daca8d882dc
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: d225c563-27f9-45b3-a0e1-8f516653837b
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_full
+		dataType: string
+		lineageTag: b10045d2-467e-40a3-b340-6c7d62b5b3fb
+		summarizeBy: none
+		sourceColumn: country_full
+
+		annotation SummarizationSetBy = Automatic
+
+	column nationality
+		dataType: string
+		lineageTag: 123369b5-c65f-432a-acaa-acd0c6085a71
+		summarizeBy: none
+		sourceColumn: nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column nationality_full
+		dataType: string
+		lineageTag: 9cbb84ef-7d38-4f39-826c-3ac4e8752039
+		summarizeBy: none
+		sourceColumn: nationality_full
+
+		annotation SummarizationSetBy = Automatic
+
+	column nationality_code
+		dataType: string
+		lineageTag: d6786c88-d98c-492d-baa1-fc1d5df0f7f6
+		summarizeBy: none
+		sourceColumn: nationality_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column height
+		dataType: int64
+		formatString: 0
+		lineageTag: de6dde23-041b-46cb-8c2f-d34fb0a68a90
+		summarizeBy: sum
+		sourceColumn: height
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight
+		dataType: int64
+		formatString: 0
+		lineageTag: b8a88f7e-9050-412d-9af5-4d6a03251c89
+		summarizeBy: sum
+		sourceColumn: weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column disciplines
+		dataType: string
+		lineageTag: 06584dc8-6e0b-4d0e-a9dd-18c919ba4736
+		summarizeBy: none
+		sourceColumn: disciplines
+
+		annotation SummarizationSetBy = Automatic
+
+	column events
+		dataType: string
+		lineageTag: 02a9de8d-2d1e-4d54-a54d-a0b34f8d5758
+		summarizeBy: none
+		sourceColumn: events
+
+		annotation SummarizationSetBy = Automatic
+
+	column birth_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 036340a5-a641-41fb-b80c-3327f8ad4dff
+		summarizeBy: none
+		sourceColumn: birth_date
+
+		variation Variation
+			isDefault
+			relationship: 89479700-17de-4df3-99d7-f179200f2931
+			defaultHierarchy: LocalDateTable_9c8f0000-f52a-4c47-8d04-1ce697068a61.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column birth_place
+		dataType: string
+		lineageTag: 806a1921-279d-4ac3-9db3-7bd8eaf22563
+		summarizeBy: none
+		sourceColumn: birth_place
+
+		annotation SummarizationSetBy = Automatic
+
+	column birth_country
+		dataType: string
+		lineageTag: 77203b2e-8506-4183-b475-519d6576c69b
+		summarizeBy: none
+		sourceColumn: birth_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column residence_place
+		dataType: string
+		lineageTag: 996a19c4-e8fc-40e3-8032-56b150c5af47
+		summarizeBy: none
+		sourceColumn: residence_place
+
+		annotation SummarizationSetBy = Automatic
+
+	column residence_country
+		dataType: string
+		lineageTag: 7c680b36-979c-40e8-9d28-6ef965d9e0ce
+		summarizeBy: none
+		sourceColumn: residence_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column occupation
+		dataType: string
+		lineageTag: 2949b94c-887d-4c9d-bcc9-96504ee5d714
+		summarizeBy: none
+		sourceColumn: occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column nickname
+		dataType: string
+		lineageTag: fa379618-9141-4041-afa2-cff6c5162dc0
+		summarizeBy: none
+		sourceColumn: nickname
+
+		annotation SummarizationSetBy = Automatic
+
+	column hobbies
+		dataType: string
+		lineageTag: 2be9a255-300a-44bc-9b55-709d71f6f5d2
+		summarizeBy: none
+		sourceColumn: hobbies
+
+		annotation SummarizationSetBy = Automatic
+
+	column education
+		dataType: string
+		lineageTag: 3a28185e-e724-4426-9852-5b4e8f3fbb96
+		summarizeBy: none
+		sourceColumn: education
+
+		annotation SummarizationSetBy = Automatic
+
+	column family
+		dataType: string
+		lineageTag: 8b9d5dd0-3965-4ff1-a26f-bf0723a97f6e
+		summarizeBy: none
+		sourceColumn: family
+
+		annotation SummarizationSetBy = Automatic
+
+	column lang
+		dataType: string
+		lineageTag: 8f0c3826-d518-48cd-aec3-832d8d6c5394
+		summarizeBy: none
+		sourceColumn: lang
+
+		annotation SummarizationSetBy = Automatic
+
+	column coach
+		dataType: string
+		lineageTag: ccd14c1f-088d-4a23-b492-58b8bb0fff5b
+		summarizeBy: none
+		sourceColumn: coach
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		lineageTag: 22241d67-dc31-4828-82d0-f13e832937c8
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column hero
+		dataType: string
+		lineageTag: 941feefd-deeb-4ffa-b6a4-fbdc30953798
+		summarizeBy: none
+		sourceColumn: hero
+
+		annotation SummarizationSetBy = Automatic
+
+	column influence
+		dataType: string
+		lineageTag: aa9244ef-86df-4901-b363-14a99cf25011
+		summarizeBy: none
+		sourceColumn: influence
+
+		annotation SummarizationSetBy = Automatic
+
+	column philosophy
+		dataType: string
+		lineageTag: 0d596a5e-64a1-43bb-b180-40ca8838b5a1
+		summarizeBy: none
+		sourceColumn: philosophy
+
+		annotation SummarizationSetBy = Automatic
+
+	column sporting_relatives
+		dataType: string
+		lineageTag: a1726be5-e9b2-4a42-b0e7-bf32954fbd70
+		summarizeBy: none
+		sourceColumn: sporting_relatives
+
+		annotation SummarizationSetBy = Automatic
+
+	column ritual
+		dataType: string
+		lineageTag: c0c0f7e9-f7f1-4804-84e1-7eaa5d63dd3c
+		summarizeBy: none
+		sourceColumn: ritual
+
+		annotation SummarizationSetBy = Automatic
+
+	column other_sports
+		dataType: string
+		lineageTag: 89079807-c20f-44de-a1ad-0c0ea5911a9f
+		summarizeBy: none
+		sourceColumn: other_sports
+
+		annotation SummarizationSetBy = Automatic
+
+	partition athletes = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\Douglas Guilherme\Documents\Estudo BI\DataSet\geral\athletes.csv"),[Delimiter=",", Columns=35, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"code", Int64.Type}, {"name", type text}, {"name_short", type text}, {"name_tv", type text}, {"gender", type text}, {"function", type text}, {"country_code", type text}, {"country", type text}, {"country_full", type text}, {"nationality", type text}, {"nationality_full", type text}, {"nationality_code", type text}, {"height", Int64.Type}, {"weight", Int64.Type}, {"disciplines", type text}, {"events", type text}, {"birth_date", type date}, {"birth_place", type text}, {"birth_country", type text}, {"residence_place", type text}, {"residence_country", type text}, {"nickname", type text}, {"hobbies", type text}, {"occupation", type text}, {"education", type text}, {"family", type text}, {"lang", type text}, {"coach", type text}, {"reason", type text}, {"hero", type text}, {"influence", type text}, {"philosophy", type text}, {"sporting_relatives", type text}, {"ritual", type text}, {"other_sports", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+
